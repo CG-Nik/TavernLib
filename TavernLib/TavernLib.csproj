@@ -200,6 +200,7 @@
     <Compile Include="Backend\WindowsProxy.cs" />
     <Compile Include="Debugging\LogArchiver.cs" />
     <Compile Include="ModdingApi\TavernModAttribute.cs" />
+    <Compile Include="ModdingApi\Roles.cs" />
     <Compile Include="ModulePorts\ChunkCommandModule.cs" />
     <Compile Include="ModulePorts\DocumentModule.cs" />
     <Compile Include="ModulePorts\PlayerCommandModule.cs" />

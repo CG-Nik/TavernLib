@@ -6,6 +6,7 @@ using MonoMod.RuntimeDetour;
 using TavernLib.Backend;
 using TavernLib.Backend.Api;
 using TavernLib.Debugging;
+using TavernLib.ModdingApi;
 using TavernLib.Patches;
 using TavernLib.Services;
 
@@ -87,6 +88,7 @@ public class Tavern : MelonPlugin
                 if (!CommandLineArguments.Contains(TavernArgs.DontManageAuth)) StartLogArchiveTimer();
 
                 TavernServices.AddService(new TavernManager());
+                Roles.Start();
             }
             
             // Client & Server Services

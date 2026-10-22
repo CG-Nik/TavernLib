@@ -5,18 +5,20 @@ using MelonLoader;
 using MonoMod.RuntimeDetour;
 using TavernLib.Backend;
 using TavernLib.Backend.Api;
+using TavernLib.Backend.Server;
 using TavernLib.Debugging;
+using TavernLib.ModdingApi;
 using TavernLib.Patches;
 using TavernLib.Services;
 
 
-[assembly: MelonInfo(typeof(TavernLib.Tavern), "TavernLib", "1.5.2", "Tavern Team", "https://github.com/ModdingTavern/TavernLib")]
+[assembly: MelonInfo(typeof(TavernLib.Tavern), "TavernLib", "1.5.3", "Tavern Team", "https://github.com/ModdingTavern/TavernLib")]
 namespace TavernLib;
 
 public class Tavern : MelonPlugin
 {
     internal static MelonLogger.Instance Logger { get; private set; }
-    public const string Version = "1.5.2";
+    public const string Version = "1.5.3";
 
     private System.Threading.Timer _logArchiveTimer;
 
@@ -87,6 +89,10 @@ public class Tavern : MelonPlugin
                 if (!CommandLineArguments.Contains(TavernArgs.DontManageAuth)) StartLogArchiveTimer();
 
                 TavernServices.AddService(new TavernManager());
+                Roles.Start();
+
+                // Servers run through TavernLauncher are backed up by the launcher itself
+                if (!CommandLineArguments.Contains(TavernArgs.DontManageAuth)) ServerBackup.Start();
             }
             
             // Client & Server Services

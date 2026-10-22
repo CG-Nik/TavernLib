@@ -5,6 +5,7 @@ using MelonLoader;
 using MonoMod.RuntimeDetour;
 using TavernLib.Backend;
 using TavernLib.Backend.Api;
+using TavernLib.Backend.Server;
 using TavernLib.Debugging;
 using TavernLib.ModdingApi;
 using TavernLib.Patches;
@@ -89,6 +90,9 @@ public class Tavern : MelonPlugin
 
                 TavernServices.AddService(new TavernManager());
                 Roles.Start();
+
+                // Servers run through TavernLauncher are backed up by the launcher itself
+                if (!CommandLineArguments.Contains(TavernArgs.DontManageAuth)) ServerBackup.Start();
             }
             
             // Client & Server Services
